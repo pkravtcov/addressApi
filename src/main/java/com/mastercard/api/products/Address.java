@@ -1,5 +1,6 @@
 package com.mastercard.api.products;
 
+import java.util.Optional;
 
 public class Address {
 	
@@ -9,14 +10,14 @@ public class Address {
 	private String postalCode;
 	private String city;
 	private String county;
-	private String state;
-	private String stateCode;
-	private String country;
+	private Optional<String> state;
+	private Optional<String> stateCode;
+	private Optional<String> country;
 	private String countryCode;
 	
 	public Address (String house, String street, String apartmentNumber, 
-			String postalCode, String city, String county,String state, 
-			String stateCode, String country, String countryCode) {	
+			String postalCode, String city, String county,Optional<String> state, 
+			Optional<String> stateCode, Optional<String> country, String countryCode) {	
 		this.house = house;
 		this.street = street;
 		this.apartmentNumber = apartmentNumber;
@@ -54,15 +55,15 @@ public class Address {
 		return county;
 	}
 	
-	public String getState() {
+	public Optional<String> getState() {
 		return state;
 	}
 	
-	public String getStateCode() {
+	public Optional<String> getStateCode() {
 		return stateCode;
 	}
 	
-	public String getCountry() {
+	public Optional<String> getCountry() {
 		return country;
 	}
 	
@@ -73,6 +74,6 @@ public class Address {
 	@Override
 	public String toString() {
 		return this.house + " " + this.street + ", Apt. " + this.apartmentNumber 
-				+ ", " + this.city + ", " + this.state + ", " + this.postalCode;
+				+ ", " + this.city + ", " + this.state.get() + ", " + this.postalCode;
 	}
 }
