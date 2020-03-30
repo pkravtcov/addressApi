@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,12 @@ import org.springframework.stereotype.Service;
 import com.mastercard.api.products.Address;
 import com.mastercard.api.utils.Utils;
 
+/**
+ * the type Address service
+ * 
+ * @author Pavel Kravtcov
+ *
+ */
 @Service
 public class AddressService {
 	
@@ -30,26 +37,36 @@ public class AddressService {
 	public static final Integer MAX_POSTAL_CODE_NUMBER = 999999;
 	
 	
+	/**
+	 * Generates random address
+	 * 
+	 * @return address
+	 */
 	public Address getRandomAddress() {
-		String country = (String) Utils.getRandomListElement(countries);
 		String house = String.valueOf(Utils.generateIntNumber(MAX_HOUSE_NUMBER));
 		String street = (String) Utils.getRandomListElement(streets);
 		String apartmentNumber = Utils.generateAlphanumericString(MAX_INT_IN_APARTMENT_NUMBER, MAX_LETTERS_IN_APARTMENT_NUMBER);
 		String postalCode = Utils.generateSixDigitNumericCode(MAX_POSTAL_CODE_NUMBER);
 		String city = (String) Utils.getRandomListElement(cities);
 		String county = (String) Utils.getRandomListElement(counties);
-		String state = (String) Utils.getRandomListElement(states);
-		String stateCode = (String) Utils.getRandomListElement(stateCodes);
+		Optional<String> state = Optional.of((String) Utils.getRandomListElement(states));
+		Optional<String> stateCode = Optional.of((String) Utils.getRandomListElement(stateCodes));
+		Optional<String> country = Optional.of((String) Utils.getRandomListElement(countries));
 		
 		Address randomAddress = new Address(house, street, apartmentNumber, postalCode,
-				city, county, state, stateCode, country, countryCodesMap.get(country));	
-		logger.info(randomAddress.toString());
+				city, county, state, stateCode, country, countryCodesMap.get(country.get()));	
+		logger.info("Address is: " + randomAddress.toString());
 		
 		return randomAddress;	
 	}
 	
-	private HashMap<String, String> getCountryCodesMap() {
-		HashMap<String, String> countryCodes = new HashMap();
+	/**
+	 * Builds a map of countries and they country codes
+	 * 
+	 * @return country codes map
+	 */
+	private Map<String, String> getCountryCodesMap() {
+		Map<String, String> countryCodes = new HashMap<>();
 		countryCodes.put("US", "USA");
 		countryCodes.put("Canada", "CAN");
 		countryCodes.put("Mexico", "MEX");

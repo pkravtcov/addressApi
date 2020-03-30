@@ -1,6 +1,9 @@
 package com.mastercard.api.utils;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
@@ -17,6 +20,13 @@ public class UtilsTest {
 	public void whenThereMoreThanSixDigitsLimitThenSixDigitCodeLengthIsReturned() {
 		String sixDigitCode = Utils.generateSixDigitNumericCode(999999999);
 		assertEquals(6, sixDigitCode.length());
+	}
+	
+	@Test
+	public void verifyThatStringIsAlphanumeric() {
+		Pattern pattern = Pattern.compile("^[a-zA-Z0-9]*$");
+		String generatedString = Utils.generateAlphanumericString(789, 5);
+		assertTrue(pattern.matcher(generatedString).matches());
 	}
 
 }

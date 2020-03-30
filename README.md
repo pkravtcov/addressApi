@@ -1,2 +1,4 @@
 # addressApi
-Generates random address api. Runs on port 7070.
+Api generates random address. Built on Spring boot. 
+
+Runs on /randomizer/address:7070
