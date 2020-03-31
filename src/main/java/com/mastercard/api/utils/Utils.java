@@ -5,7 +5,7 @@ import java.util.Random;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
- * Utilities class which provides helpful functions
+ * Utilities class with helpful functions
  * 
  * @author Pavel Kravtcov
  *

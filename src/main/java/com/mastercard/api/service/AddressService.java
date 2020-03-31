@@ -61,7 +61,7 @@ public class AddressService {
 	}
 	
 	/**
-	 * Builds a map of countries and they country codes
+	 * Builds a map of countries and their country codes
 	 * 
 	 * @return country codes map
 	 */
